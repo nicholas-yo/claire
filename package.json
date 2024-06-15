@@ -1,0 +1,34 @@
+{
+  "name": "bot",
+  "main": "src/index.js",
+  "module": "src/index.js",
+  "type": "module",
+  "scripts": {
+    "start": "node .",
+    "dev": "node --watch .",
+    "db:push": "drizzle-kit push",
+    "db:pull": "drizzle-kit introspect",
+    "db:studio": "drizzle-kit studio --port 5000 --verbose"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.2",
+    "@types/node-cron": "^3.0.11",
+    "drizzle-kit": "^0.22.1"
+  },
+  "peerDependencies": {
+    "typescript": "^5.4.5"
+  },
+  "dependencies": {
+    "@libsql/client": "^0.4.3",
+    "@paralleldrive/cuid2": "^2.2.2",
+    "@sentry/node": "^8.8.0",
+    "@sentry/profiling-node": "^8.8.0",
+    "colorette": "^2.0.20",
+    "discord.js": "^14.15.2",
+    "dotenv": "^16.4.5",
+    "drizzle-orm": "^0.31.0",
+    "glob": "^10.4.1",
+    "node-cron": "^3.0.3",
+    "zod": "^3.23.8"
+  }
+}
