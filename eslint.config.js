@@ -7,8 +7,10 @@ import * as drizzle from "eslint-plugin-drizzle";
 import editorconfig from "eslint-plugin-editorconfig";
 import security from "eslint-plugin-security";
 import perfectionist from "eslint-plugin-perfectionist";
+import { defineFlatConfig } from "eslint-define-config";
 
-export default [
+// @ts-expect-error
+export default defineFlatConfig([
   prettier,
   js.configs.recommended,
   security.configs.recommended,
@@ -37,7 +39,4 @@ export default [
       ]
     }
   }
-];
-
-// export default defineFlatConfig([
-// ]);
+]);
