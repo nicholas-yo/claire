@@ -8,7 +8,7 @@ import { glob } from "glob";
  * @returns {Promise<void>} - A promise that resolves when all files have been imported.
  */
 export const $import = async pattern => {
-  for (const commandPath of await glob(pattern)) {
-    await import(`../${relative("src/", commandPath)}`);
+  for (const path of await glob(pattern)) {
+    await import(`../${relative("src/", path)}`);
   }
 };
