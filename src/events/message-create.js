@@ -4,7 +4,7 @@ import { incrementUserBumpCount } from "../utils/increment-user-bump-count.js";
 import { env } from "../env.js";
 import * as Sentry from "@sentry/node";
 
-event$(Events.MessageCreate, async (message) => {
+event$(Events.MessageCreate, async message => {
   try {
     if (message.interaction?.commandName !== "bump") return;
 

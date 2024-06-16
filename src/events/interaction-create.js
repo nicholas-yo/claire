@@ -2,7 +2,7 @@ import * as Sentry from "@sentry/node";
 import { commands, event$ } from "../lib/bootstrap.js";
 import { EmbedBuilder, Events } from "discord.js";
 
-event$(Events.InteractionCreate, async (interaction) => {
+event$(Events.InteractionCreate, async interaction => {
   if (!interaction.isChatInputCommand() || !interaction.isCommand()) return;
 
   const command = commands.get(interaction.commandName);
@@ -25,7 +25,7 @@ event$(Events.InteractionCreate, async (interaction) => {
 
     await interaction.reply({
       embeds: [embed],
-      ephemeral: true,
+      ephemeral: true
     });
   }
 });

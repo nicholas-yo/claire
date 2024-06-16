@@ -9,5 +9,5 @@ await $import("src/commands/**/*");
 const rest = new REST().setToken(env.TOKEN);
 
 await rest.put(Routes.applicationCommands(env.APPLICATION_ID), {
-  body: [...commands.values()].map(({ builder }) => builder.toJSON()),
+  body: [...commands.values()].map(({ builder }) => builder.toJSON())
 });

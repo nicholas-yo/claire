@@ -8,7 +8,7 @@ const envSchema = z.object({
   BUMPER_ROLE_ID: z.string(),
   APPLICATION_ID: z.string(),
   GUILD_ID: z.string(),
-  SENTRY_DSN: z.string().url(),
+  SENTRY_DSN: z.string().url()
 });
 
 export const env = envSchema.parse(process.env);

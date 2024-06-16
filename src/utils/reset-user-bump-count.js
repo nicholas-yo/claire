@@ -4,14 +4,15 @@ import { usersTable } from "../db/schema/users-table.js";
 
 /**
  * @async
- * @param {string} userId
+ * @param {string} userId - The ID of the user to reset the bump count for
  * @returns {Promise<void>}
+ * @description Reset the bump count for a user.
  */
-export const resetUserBumpCount = async (userId) => {
+export const resetUserBumpCount = async userId => {
   await db
     .update(usersTable)
     .set({
-      bumpCount: 0,
+      bumpCount: 0
     })
     .where(sql`${usersTable.id} = ${userId}`);
 };

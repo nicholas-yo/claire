@@ -1,8 +1,9 @@
 /**
- * @param {string} userId
- * @param {number | null} bumpCount
- * @param {boolean} member
- * @returns {string}
+ * @description Creates a personalized message based on a user's bump count.
+ * @param {string} userId - The Discord user's ID.
+ * @param {number | null} bumpCount - The user's bump count, which can be null if no bumps have been given.
+ * @param {boolean} member - A boolean value indicating whether the user is a member (true) or not (false).
+ * @returns {string} A Markdown-formatted string with the personalized message.
  */
 export const createBumpMessage = (userId, bumpCount, member) => {
   if (!bumpCount) {

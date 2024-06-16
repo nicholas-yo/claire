@@ -12,11 +12,12 @@ export const commands = new Map();
 export const events = new Map();
 
 /**
+ * @description Initializes the Discord bot by registering events, importing commands, logging in, and scheduling tasks.
  * @async
- * @param {import('discord.js').Client} client
- * @returns {Promise<void>}
+ * @param {import('discord.js').Client} client - The Discord client instance to be initialized.
+ * @returns {Promise<void>} - A promise that resolves when the initialization process is complete.
  */
-export const bootstrap = async (client) => {
+export const bootstrap = async client => {
   try {
     await registerEvents(client, events);
 

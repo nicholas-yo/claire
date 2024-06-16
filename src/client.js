@@ -5,6 +5,6 @@ export const client = new Client({
   intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages],
   partials: [Partials.Reaction, Partials.GuildMember],
   presence: {
-    status: "online",
-  },
+    status: "online"
+  }
 });

@@ -1,7 +1,7 @@
 import { EmbedBuilder, SlashCommandBuilder } from "discord.js";
 import { command$ } from "../lib/bootstrap.js";
 
-command$(async (interaction) => {
+command$(async interaction => {
   const ping = Math.round(interaction.client.ws.ping);
 
   const embed = new EmbedBuilder()
@@ -15,7 +15,7 @@ command$(async (interaction) => {
   if (avatarURL) {
     embed.setAuthor({
       name: interaction.client.user.username,
-      iconURL: avatarURL,
+      iconURL: avatarURL
     });
   }
 

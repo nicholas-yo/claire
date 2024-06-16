@@ -14,5 +14,5 @@ export const usersTable = sqliteTable("users", {
   updatedAt: text("updated_at")
     .notNull()
     .default(sql`(CURRENT_DATE)`)
-    .$onUpdateFn(() => sql`(CURRENT_DATE)`),
+    .$onUpdateFn(() => sql`(CURRENT_DATE)`)
 });

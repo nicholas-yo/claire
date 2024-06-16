@@ -2,7 +2,7 @@ import { EmbedBuilder, SlashCommandBuilder } from "discord.js";
 import { command$ } from "../lib/bootstrap.js";
 import { getTopBumpers } from "../utils/get-top-bumpers.js";
 
-command$(async (interaction) => {
+command$(async interaction => {
   const topBumpers = await getTopBumpers();
 
   if (!topBumpers.length) {
@@ -18,13 +18,13 @@ command$(async (interaction) => {
     if (avatarURL) {
       embed.setAuthor({
         name: interaction.user.username,
-        iconURL: avatarURL,
+        iconURL: avatarURL
       });
     }
 
     return await interaction.reply({
       embeds: [embed],
-      ephemeral: true,
+      ephemeral: true
     });
   }
 
@@ -33,7 +33,7 @@ command$(async (interaction) => {
       (user, idx) =>
         /* md */ `**${idx + 1}º** <@${user.id}> deu bump no servidor ${
           user.bumpCount
-        } vezes!`
+        } ${idx === 1 ? "vezes" : "vez"}!`
     )
     .join("\n");
 
@@ -44,6 +44,6 @@ command$(async (interaction) => {
     .setTimestamp();
 
   await interaction.reply({
-    embeds: [embed],
+    embeds: [embed]
   });
 }, new SlashCommandBuilder().setName("topbumpers").setDescription("🏆 Mostra os top bumpers do servidor."));
