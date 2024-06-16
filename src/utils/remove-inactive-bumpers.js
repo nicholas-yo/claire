@@ -1,6 +1,6 @@
-import { env } from "../env";
-import { getUsers } from "./get-users";
-import { resetUserBumpCount } from "./reset-user-bump-count";
+import { env } from "../env.js";
+import { getUsers } from "./get-users.js";
+import { resetUserBumpCount } from "./reset-user-bump-count.js";
 
 /**
  * @description Remove inactive users with the bumper role based on their last bump activity.
