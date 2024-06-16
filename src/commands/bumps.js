@@ -20,8 +20,8 @@ command$(
 
     if (avatarURL) {
       embed.setAuthor({
-        name: user.username,
-        iconURL: avatarURL
+        iconURL: avatarURL,
+        name: user.username
       });
     }
 

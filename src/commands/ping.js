@@ -14,8 +14,8 @@ command$(async interaction => {
 
   if (avatarURL) {
     embed.setAuthor({
-      name: interaction.client.user.username,
-      iconURL: avatarURL
+      iconURL: avatarURL,
+      name: interaction.client.user.username
     });
   }
 

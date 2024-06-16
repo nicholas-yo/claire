@@ -5,6 +5,6 @@ import { env } from "./env.js";
 Sentry.init({
   dsn: env.SENTRY_DSN,
   integrations: [nodeProfilingIntegration()],
-  tracesSampleRate: 1.0,
-  profilesSampleRate: 1.0
+  profilesSampleRate: 1.0,
+  tracesSampleRate: 1.0
 });

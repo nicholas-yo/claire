@@ -2,18 +2,42 @@ import globals from "globals";
 import jsdoc from "eslint-plugin-jsdoc";
 import js from "@eslint/js";
 import prettier from "eslint-plugin-prettier/recommended";
+import noSecrets from "eslint-plugin-no-secrets";
+import * as drizzle from "eslint-plugin-drizzle";
+import editorconfig from "eslint-plugin-editorconfig";
+import security from "eslint-plugin-security";
+import perfectionist from "eslint-plugin-perfectionist";
 
 export default [
   prettier,
   js.configs.recommended,
+  security.configs.recommended,
   jsdoc.configs["flat/recommended"],
+  editorconfig.configs.noconflict,
   {
-    ignores: ["node_modules/**/*"],
     files: ["**/*.js"],
+    ignores: ["node_modules/**/*"],
+    languageOptions: { globals: globals.node },
     plugins: {
-      jsdoc
+      drizzle,
+      jsdoc,
+      "no-secrets": noSecrets,
+      perfectionist
     },
-    languageOptions: { globals: globals.node }
+    rules: {
+      "drizzle/enforce-delete-with-where": "error",
+      "drizzle/enforce-update-with-where": "error",
+      "no-secrets/no-secrets": "error",
+      "perfectionist/sort-objects": [
+        "error",
+        {
+          order: "asc",
+          type: "natural"
+        }
+      ]
+    }
   }
 ];
 
+// export default defineFlatConfig([
+// ]);

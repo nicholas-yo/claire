@@ -10,8 +10,8 @@ import { usersTable } from "../db/schema/users-table.js";
 export const getTopBumpers = async () =>
   await db
     .select({
-      id: usersTable.id,
-      bumpCount: usersTable.bumpCount
+      bumpCount: usersTable.bumpCount,
+      id: usersTable.id
     })
     .from(usersTable)
     .orderBy(desc(usersTable.bumpCount));

@@ -13,13 +13,13 @@ export const incrementUserBumpCount = async userId => {
 
   const [{ bumpCount }] = await db
     .insert(usersTable)
-    .values({ id: userId, bumpCount: 1, lastBumpAt })
+    .values({ bumpCount: 1, id: userId, lastBumpAt })
     .onConflictDoUpdate({
-      target: usersTable.id,
       set: {
         bumpCount: sql`${usersTable.bumpCount} + 1`,
         lastBumpAt
-      }
+      },
+      target: usersTable.id
     })
     .returning();
 

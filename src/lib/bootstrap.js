@@ -27,8 +27,8 @@ export const bootstrap = async client => {
 
     cron.schedule("0 0 * * *", now => removeInactiveBumpers(client, now), {
       name: "remove-role-from-inactive-users",
-      timezone: "America/Sao_Paulo",
-      recoverMissedExecutions: true
+      recoverMissedExecutions: true,
+      timezone: "America/Sao_Paulo"
     });
   } catch (e) {
     Sentry.captureException(e);
@@ -37,7 +37,7 @@ export const bootstrap = async client => {
 
 /** @type {import('../types/command$').Command$} */
 export const command$ = (handler, builder) => {
-  commands.set(builder.name, { handler, builder });
+  commands.set(builder.name, { builder, handler });
 };
 
 /** @type {import('../types/event$').Event$} */
