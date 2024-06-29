@@ -1,4 +1,4 @@
-import { desc } from "drizzle-orm/expressions";
+import { desc } from "drizzle-orm/expressions.js";
 import { db } from "../db/index.js";
 import { usersTable } from "../db/schema/users-table.js";
 

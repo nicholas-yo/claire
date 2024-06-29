@@ -1,5 +1,6 @@
 import cuid2 from "@paralleldrive/cuid2";
 import { sql } from "drizzle-orm";
+// eslint-disable-next-line import/extensions
 import { int, sqliteTable, text } from "drizzle-orm/sqlite-core";
 
 export const usersTable = sqliteTable("users", {

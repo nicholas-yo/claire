@@ -1,4 +1,5 @@
 import { createClient } from "@libsql/client";
+// eslint-disable-next-line import/extensions
 import { drizzle } from "drizzle-orm/libsql";
 import { env } from "../env.js";
 
