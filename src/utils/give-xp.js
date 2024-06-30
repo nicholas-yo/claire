@@ -11,7 +11,7 @@ import { SQLiteTransaction } from "drizzle-orm/sqlite-core";
  * @param {number} value - The XP value to be added.
  * @param {number} multiplier - A multiplier applied to the XP value.
  * @param {SQLiteTransaction<"async", import("@libsql/client").ResultSet, Record<string, never>, import("drizzle-orm").ExtractTablesWithRelations<Record<string, never>>>} [tx] - Optional transaction context.
- * @returns {Promise<{experience:number, level:number, id: string}>} - The updated XP value for the user.
+ * @returns {Promise<{experience:number, level:number, id: string}>} -  Object containing updated experience, level, and user ID.
  */
 export const giveXp = async (userId, value, multiplier, tx) => {
   const [{ experience, id, level }] = await (tx || db)
