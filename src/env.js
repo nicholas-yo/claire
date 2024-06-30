@@ -1,5 +1,4 @@
 import { z } from "zod";
-import "dotenv/config.js";
 
 const envSchema = z.object({
   APPLICATION_ID: z.string(),
