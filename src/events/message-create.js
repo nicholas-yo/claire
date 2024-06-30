@@ -3,25 +3,40 @@ import { event$ } from "../lib/bootstrap.js";
 import { incrementUserBumpCount } from "../utils/increment-user-bump-count.js";
 import { env } from "../env.js";
 import * as Sentry from "@sentry/node";
+import { assignRolesBasedOnXp } from "../utils/assign-roles-based-on-xp.js";
 
 event$(Events.MessageCreate, async message => {
   try {
-    if (message.interaction?.commandName !== "bump") return;
+    const member = message.member;
 
-    if (!message.member || !message.guild) return;
+    const guild = message.guild;
 
-    await message.react("💝");
+    if (!member || !guild) return;
 
-    const bumpCount = await incrementUserBumpCount(message.interaction.user.id);
+    await assignRolesBasedOnXp(
+      member.user.id,
+      guild,
+      member,
+      message.content.length,
+      0.2
+    );
 
-    const hasBumperRole = message.member.roles.cache.has(env.BUMPER_ROLE_ID);
+    if (message.interaction?.commandName === "bump") {
+      await message.react("💝");
 
-    if (bumpCount && bumpCount === 3 && !hasBumperRole) {
-      const bumperRole = message.guild.roles.cache.get(env.BUMPER_ROLE_ID);
+      const bumpCount = await incrementUserBumpCount(
+        message.interaction.user.id
+      );
 
-      if (!bumperRole) return;
+      const hasBumperRole = member.roles.cache.has(env.BUMPER_ROLE_ID);
 
-      await message.member.roles.add(bumperRole);
+      if (bumpCount && bumpCount === 3 && !hasBumperRole) {
+        const bumperRole = message.guild.roles.cache.get(env.BUMPER_ROLE_ID);
+
+        if (!bumperRole) return;
+
+        await member.roles.add(bumperRole);
+      }
     }
   } catch (e) {
     console.log(e);

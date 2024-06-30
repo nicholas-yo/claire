@@ -1,4 +1,5 @@
-import { desc } from "drizzle-orm/expressions.js";
+// eslint-disable-next-line import/extensions
+import { desc } from "drizzle-orm/expressions";
 import { db } from "../db/index.js";
 import { usersTable } from "../db/schema/users-table.js";
 
