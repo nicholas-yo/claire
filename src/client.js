@@ -5,6 +5,11 @@ export const client = new Client({
   intents: [GatewayIntentBits.Guilds, GatewayIntentBits.GuildMessages],
   partials: [Partials.Reaction, Partials.GuildMember],
   presence: {
+    activities: [
+      {
+        name: "Bitbunker"
+      }
+    ],
     status: "online"
   }
 });
