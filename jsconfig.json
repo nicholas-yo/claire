@@ -9,9 +9,16 @@
     "moduleResolution": "bundler",
     "noEmit": true,
     "strict": true,
+    "maxNodeModuleJsDepth": 0,
     "forceConsistentCasingInFileNames": true,
     "skipLibCheck": true,
     "noFallthroughCasesInSwitch": true,
     "noPropertyAccessFromIndexSignature": false
-  }
+  },
+  "exclude": [
+    "node_modules",
+    "./node_modules",
+    "./node_modules/*",
+    "./node_modules/@types/node/index.d.ts"
+  ]
 }
