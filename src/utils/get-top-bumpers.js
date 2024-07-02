@@ -2,6 +2,7 @@
 import { desc } from "drizzle-orm/expressions";
 import { db } from "../db/index.js";
 import { usersTable } from "../db/schema/users-table.js";
+import { sql } from "drizzle-orm";
 
 /**
  * @description Retrieves the top users based on their bump count.
@@ -15,4 +16,5 @@ export const getTopBumpers = async () =>
       id: usersTable.id
     })
     .from(usersTable)
+    .where(sql`${usersTable.bumpCount} > 0`)
     .orderBy(desc(usersTable.bumpCount));
