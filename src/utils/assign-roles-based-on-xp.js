@@ -32,10 +32,10 @@ export const assignRolesBasedOnXp = async (
 
     const ids = xpRolesToAdd.map(({ id }) => id);
 
+    if (!xpRolesToAdd.length) return;
+
     if (!guild.roles.cache.hasAny(...ids))
       throw new Error("The roles were not found on the server");
-
-    if (!xpRolesToAdd.length) return;
 
     await member.roles.add(ids);
 
