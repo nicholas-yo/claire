@@ -19,11 +19,17 @@ export const bootstrap = async client => {
 
     await client.login(env.TOKEN);
 
-    cron.schedule("0 0 * * *", now => removeInactiveBumpers(client, now), {
-      name: "remove-role-from-inactive-users",
-      recoverMissedExecutions: true,
-      timezone: "America/Sao_Paulo"
-    });
+    const cronWithCheckIn = Sentry.cron.instrumentNodeCron(cron);
+
+    cronWithCheckIn.schedule(
+      "0 0 * * *",
+      now => removeInactiveBumpers(client, now),
+      {
+        name: "remove-inactive-bumpers",
+        recoverMissedExecutions: true,
+        timezone: "America/Sao_Paulo"
+      }
+    );
   } catch (e) {
     console.log(e);
 
