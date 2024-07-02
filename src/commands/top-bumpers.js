@@ -33,7 +33,7 @@ export default createSlashCommand(async interaction => {
       (user, idx) =>
         /* md */ `**${idx + 1}º** <@${user.id}> deu bump no servidor ${
           user.bumpCount
-        } ${idx === 1 ? "vezes" : "vez"}!`
+        } ${idx === 1 ? "vez" : "vezes"}!`
     )
     .join("\n");
 
