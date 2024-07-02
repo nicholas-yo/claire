@@ -1,7 +1,7 @@
 import { Events } from "discord.js";
-import { event$ } from "../lib/bootstrap.js";
 import { magenta } from "colorette";
+import { createEvent } from "../lib/create-event.js";
 
-event$(Events.ClientReady, client =>
+export default createEvent(Events.ClientReady, client =>
   console.log(`${magenta("start")} ~ Oi, oi! Eu sou a ${client.user.username}!`)
 );

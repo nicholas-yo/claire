@@ -1,7 +1,7 @@
 import { ChannelType, EmbedBuilder, SlashCommandBuilder } from "discord.js";
-import { command$ } from "../lib/bootstrap.js";
+import { createSlashCommand } from "../lib/create-slash-command.js";
 
-command$(async interaction => {
+export default createSlashCommand(async interaction => {
   const embed = new EmbedBuilder()
     .setTitle(/** @type {string} */ (interaction.guild?.name))
     .setThumbnail(/** @type {string} */ (interaction.guild?.iconURL()))

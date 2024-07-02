@@ -1,7 +1,7 @@
 import { EmbedBuilder, SlashCommandBuilder } from "discord.js";
-import { command$ } from "../lib/bootstrap.js";
+import { createSlashCommand } from "../lib/create-slash-command.js";
 
-command$(
+export default createSlashCommand(
   async interaction => {
     const member = interaction.options.get("user", false) || interaction.member;
 

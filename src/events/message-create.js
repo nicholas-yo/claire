@@ -1,11 +1,11 @@
 import { Events } from "discord.js";
-import { event$ } from "../lib/bootstrap.js";
 import { incrementUserBumpCount } from "../utils/increment-user-bump-count.js";
 import { env } from "../env.js";
 import * as Sentry from "@sentry/node";
 import { assignRolesBasedOnXp } from "../utils/assign-roles-based-on-xp.js";
+import { createEvent } from "../lib/create-event.js";
 
-event$(Events.MessageCreate, async message => {
+export default createEvent(Events.MessageCreate, async message => {
   try {
     const member = message.member;
 

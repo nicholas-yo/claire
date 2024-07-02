@@ -1,9 +1,9 @@
 import { EmbedBuilder, SlashCommandBuilder } from "discord.js";
-import { command$ } from "../lib/bootstrap.js";
 import { getUserBumpCount } from "../utils/get-user-bump-count.js";
 import { createBumpMessage } from "../utils/create-bump-message.js";
+import { createSlashCommand } from "../lib/create-slash-command.js";
 
-command$(
+export default createSlashCommand(
   async interaction => {
     const member = interaction.options.get("user", false);
     const user = member?.user || interaction.user;

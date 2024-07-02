@@ -1,8 +1,8 @@
 import { EmbedBuilder, SlashCommandBuilder } from "discord.js";
-import { command$ } from "../lib/bootstrap.js";
 import { getTopBumpers } from "../utils/get-top-bumpers.js";
+import { createSlashCommand } from "../lib/create-slash-command.js";
 
-command$(async interaction => {
+export default createSlashCommand(async interaction => {
   const topBumpers = await getTopBumpers();
 
   if (!topBumpers.length) {

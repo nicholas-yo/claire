@@ -2,14 +2,8 @@ import { env } from "../env.js";
 import { registerEvents } from "./register-events.js";
 import cron from "node-cron";
 import * as Sentry from "@sentry/node";
-import { $import } from "./$import.js";
 import { removeInactiveBumpers } from "../utils/remove-inactive-bumpers.js";
-
-/** @type {import('../types/commands').Commands} */
-export const commands = new Map();
-
-/** @type {import('../types/events').Events} */
-export const events = new Map();
+import { registerSlashCommands } from "./register-slash-commands.js";
 
 /**
  * @description Initializes the Discord bot by registering events, importing commands, logging in, and scheduling tasks.
@@ -19,9 +13,9 @@ export const events = new Map();
  */
 export const bootstrap = async client => {
   try {
-    await registerEvents(client, events);
+    await registerEvents(client);
 
-    await $import("src/commands/**/*");
+    await registerSlashCommands(client);
 
     await client.login(env.TOKEN);
 
@@ -31,20 +25,8 @@ export const bootstrap = async client => {
       timezone: "America/Sao_Paulo"
     });
   } catch (e) {
+    console.log(e);
+
     Sentry.captureException(e);
   }
-};
-
-/** @type {import('../types/command$').Command$} */
-export const command$ = (handler, builder) => {
-  commands.set(builder.name, { builder, handler });
-};
-
-/** @type {import('../types/event$').Event$} */
-export const event$ = (event, listener) => {
-  events.set(
-    event,
-    // @ts-expect-error
-    listener
-  );
 };
