@@ -5,8 +5,8 @@ import { millisecondsToMinutes } from "../lib/milliseconds-to-minutes.js";
 import { minutesToMilliseconds } from "../lib/minutes-to-milliseconds.js";
 import { createEvent } from "../lib/create-event.js";
 
-/** @type {ReturnType<typeof setInterval>} */
-let intervalId;
+/** @type {Map<string, ReturnType<typeof setInterval>>} */
+const intervals = new Map();
 
 const ms = /** @type {const} */ minutesToMilliseconds(10);
 
@@ -19,9 +19,14 @@ export default createEvent(
 
       if (!newMember || !oldMember || newMember.user.bot) return;
 
-      if (!oldMember.voice.channelId) return clearInterval(intervalId);
+      if (!oldMember.voice.channelId) {
+        clearInterval(intervals.get(oldMember.user.id));
 
-      intervalId = setInterval(
+        // eslint-disable-next-line drizzle/enforce-delete-with-where
+        return intervals.delete(oldMember.user.id);
+      }
+
+      const interval = setInterval(
         async () =>
           await assignRolesBasedOnXp(
             newMember.user.id,
@@ -32,6 +37,8 @@ export default createEvent(
           ),
         ms
       );
+
+      intervals.set(newMember.user.id, interval);
     } catch (e) {
       console.log(e);
 
