@@ -1,9 +1,5 @@
 import { z } from "zod";
-import { config } from "dotenv";
-
-config({
-  path: process.env.NODE_ENV === "development" ? ".development.env" : ".env"
-});
+import "dotenv/config.js";
 
 const envSchema = z.object({
   APPLICATION_ID: z.string(),
