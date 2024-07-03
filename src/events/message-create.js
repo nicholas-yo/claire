@@ -11,7 +11,7 @@ export default createEvent(Events.MessageCreate, async message => {
 
     const guild = message.guild;
 
-    if (!member || !guild) return;
+    if (!member || !guild || message.member.user.bot) return;
 
     await assignRolesBasedOnXp(
       member.user.id,
