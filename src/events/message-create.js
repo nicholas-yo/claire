@@ -11,15 +11,17 @@ export default createEvent(Events.MessageCreate, async message => {
 
     const guild = message.guild;
 
-    if (!member || !guild || message.member.user.bot) return;
+    if (!member || !guild) return;
 
-    await assignRolesBasedOnXp(
-      member.user.id,
-      guild,
-      member,
-      message.content.length,
-      0.2
-    );
+    if (!message.member.user.bot) {
+      await assignRolesBasedOnXp(
+        member.user.id,
+        guild,
+        member,
+        message.content.length,
+        0.2
+      );
+    }
 
     if (message.interaction?.commandName === "bump") {
       await message.react("💝");
