@@ -30,6 +30,10 @@ export default createEvent(Events.MessageCreate, async message => {
         message.interaction.user.id
       );
 
+      const member = await message.guild.members.fetch({
+        user: message.interaction.user
+      });
+
       const hasBumperRole = member.roles.cache.has(env.BUMPER_ROLE_ID);
 
       if (bumpCount && bumpCount === 3 && !hasBumperRole) {
