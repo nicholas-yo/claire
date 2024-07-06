@@ -60,4 +60,4 @@ export default createSlashCommand(async interaction => {
     .setTimestamp();
 
   await interaction.reply({ embeds: [embed] });
-}, new SlashCommandBuilder().setName("serverinfo").setDescription("🍒 Mostra informações do servidor."));
+}, new SlashCommandBuilder().setName("serverinfo").setDescription("🍒 Mostra informações do servidor.").setDMPermission(false));
