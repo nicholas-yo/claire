@@ -36,7 +36,7 @@ export default createEvent(Events.MessageCreate, async message => {
 
       const hasBumperRole = member.roles.cache.has(env.BUMPER_ROLE_ID);
 
-      if (bumpCount && bumpCount === 3 && !hasBumperRole) {
+      if (bumpCount && bumpCount >= 3 && !hasBumperRole) {
         const bumperRole = message.guild.roles.cache.get(env.BUMPER_ROLE_ID);
 
         if (!bumperRole) return;
