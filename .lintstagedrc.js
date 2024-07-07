@@ -1,3 +1,3 @@
 export default {
-  "**/*.js": ["eslint --fix"]
+  "**/(!.funcignore)*.js": ["eslint --fix"]
 };

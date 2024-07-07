@@ -1,8 +1,6 @@
 import { env } from "../env.js";
 import { registerEvents } from "./register-events.js";
-import cron from "node-cron";
 import * as Sentry from "@sentry/node";
-import { removeInactiveBumpers } from "../utils/remove-inactive-bumpers.js";
 import { registerSlashCommands } from "./register-slash-commands.js";
 
 /**
@@ -18,18 +16,6 @@ export const bootstrap = async client => {
     await registerSlashCommands(client);
 
     await client.login(env.TOKEN);
-
-    const cronWithCheckIn = Sentry.cron.instrumentNodeCron(cron);
-
-    cronWithCheckIn.schedule(
-      "0 0 * * *",
-      now => removeInactiveBumpers(client, now),
-      {
-        name: "remove-inactive-bumpers",
-        recoverMissedExecutions: true,
-        timezone: "America/Sao_Paulo"
-      }
-    );
   } catch (e) {
     console.log(e);
 
