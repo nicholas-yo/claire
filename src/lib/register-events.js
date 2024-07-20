@@ -1,7 +1,5 @@
-import { glob } from "glob";
-import { globOptions } from "../options/glob.js";
 import { Client } from "discord.js";
-import { join } from "path/posix";
+import { getEvents } from "./get-events.js";
 
 /**
  * @typedef Event
@@ -14,17 +12,7 @@ import { join } from "path/posix";
  * @param {Client} client - The Discord.js client instance.
  */
 export const registerEvents = async client => {
-  /** @type {Set<Event>} */
-  const events = new Set();
+  const events = await getEvents();
 
-  for (const path of await glob("events/**/*", globOptions)) {
-    /** @type {{default: Event}} */
-    const { default: event } = await import(join("../", path));
-
-    events.add(event);
-  }
-
-  for (const event of events) {
-    client.on(event.name, event.listener);
-  }
+  for (const event of events) client.on(event.name, event.listener);
 };
