@@ -1,26 +1,19 @@
-import { app } from "@azure/functions";
-import { client } from "../client.js";
-import { env } from "../env.js";
-import { resetUserBumpCount } from "../utils/reset-user-bump-count.js";
-import { db } from "../db/index.js";
-import { usersTable } from "../db/schema/users-table.js";
 import * as Sentry from "@sentry/node";
+import { Client } from "discord.js";
+import { db } from "../db";
+import { usersTable } from "../db/schema/users-table";
+import { resetUserBumpCount } from "../utils/reset-user-bump-count.js";
 // eslint-disable-next-line import/extensions
 import { and, lte, gt } from "drizzle-orm/expressions";
 import { sql } from "drizzle-orm";
+import { env } from "../env.js";
 
-app.timer("RemoveInactiveBumpers", {
-  handler: removeInactiveBumpers,
-  schedule: "0 0 * * *"
-});
-
-/**
- * @type {import("@azure/functions").TimerHandler}
- * @returns {Promise<void>}
- */
-export async function removeInactiveBumpers() {
+export const removeInactiveBumpers = async (
+  /** @type {Date | "manual" | "init"} */ now,
+  /** @type {Client} */ client
+) => {
   try {
-    const now = new Date();
+    if (!(now instanceof Date)) return;
 
     const limit = new Date(now.getTime() - 1000 * 60 * 60 * 24);
 
@@ -30,7 +23,7 @@ export async function removeInactiveBumpers() {
         .where(
           and(
             lte(
-              sql`strftime('%s', ${usersTable.lastBumpAt}) * 1000`,
+              sql`strftime('%Y-%m', ${usersTable.lastBumpAt} / 1000, 'unixepoch')`,
               limit.getTime()
             ),
             gt(usersTable.bumpCount, 0)
@@ -59,4 +52,4 @@ export async function removeInactiveBumpers() {
   } catch (e) {
     Sentry.captureException(e);
   }
-}
+};
