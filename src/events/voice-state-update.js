@@ -33,7 +33,7 @@ export default createEvent(
             newState.guild,
             newMember,
             millisecondsToMinutes(ms),
-            20.0
+            0.5
           ),
         ms
       );
