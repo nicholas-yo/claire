@@ -8,7 +8,7 @@ on:
       [ main ]
     paths:
     - '**'
-    - '.github/workflows/claire-AutoDeployTrigger-09798790-1214-4a3a-8d43-6207d7b87901.yml'
+    - '.github/workflows/claire-AutoDeployTrigger-ca5bdf19-6854-4165-9414-4384e48bccdb.yml'
 
   # Allow manual trigger 
   workflow_dispatch:      
@@ -39,7 +39,7 @@ jobs:
           registryUsername: ${{ secrets.CLAIRE_REGISTRY_USERNAME }}
           registryPassword: ${{ secrets.CLAIRE_REGISTRY_PASSWORD }}
           containerAppName: claire
-          resourceGroup: DefaultResourceGroup-CQ
+          resourceGroup: bitbunker
           imageToBuild: nicky48/claire:${{ github.sha }}
           _buildArgumentsKey_: |
             _buildArgumentsValues_
