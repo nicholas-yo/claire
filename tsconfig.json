@@ -1,0 +1,26 @@
+{
+  "compilerOptions": {
+    "lib": ["ESNext", "DOM"],
+    "target": "ESNext",
+    "verbatimModuleSyntax": true,
+    "module": "ESNext",
+    "moduleDetection": "force",
+    "esModuleInterop": true,
+    "moduleResolution": "bundler",
+    "strictFunctionTypes": true,
+    "strictNullChecks": true,
+    "strict": true,
+    "maxNodeModuleJsDepth": 0,
+    "forceConsistentCasingInFileNames": true,
+    "skipLibCheck": true,
+    "noFallthroughCasesInSwitch": true,
+    "noPropertyAccessFromIndexSignature": false
+  },
+  "include": [".lintstagedrc.js", "eslint.config.js", "**/*.ts"],
+  "exclude": [
+    "node_modules",
+    "./node_modules",
+    "./node_modules/*",
+    "./node_modules/@types/node/index.d.ts"
+  ]
+}

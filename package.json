@@ -1,13 +1,13 @@
 {
   "name": "bot",
-  "main": "src/index.js",
-  "module": "src/index.js",
+  "main": "src/index",
+  "module": "src/index",
   "type": "module",
   "scripts": {
-    "start": "NODE_ENV=production node src/index.js",
+    "start": "NODE_ENV=production tsx .",
     "format": "prettier --write \"**/*.(ts|js|json)\"",
     "lint": "eslint .",
-    "dev": "NODE_ENV=development node --watch src/index.js",
+    "dev": "NODE_ENV=development tsx --env-file=.development.env --watch .",
     "db:push": "drizzle-kit push",
     "db:pull": "drizzle-kit introspect",
     "db:studio": "drizzle-kit studio --port 5000 --verbose",
@@ -18,6 +18,8 @@
     "@types/eslint-plugin-security": "^3.0.0",
     "@types/memoizee": "^0.4.11",
     "@types/node": "^20.14.2",
+    "@typescript-eslint/eslint-plugin": "^7.16.1",
+    "@typescript-eslint/parser": "^7.16.1",
     "drizzle-kit": "^0.22.1",
     "eslint": "^9.6.0",
     "eslint-config-prettier": "^9.1.0",
@@ -32,7 +34,8 @@
     "eslint-plugin-security": "^3.0.1",
     "globals": "^15.5.0",
     "husky": "^9.0.11",
-    "lint-staged": "^15.2.7"
+    "lint-staged": "^15.2.7",
+    "prettier": "^3.3.3"
   },
   "peerDependencies": {
     "typescript": "^5.4.5"
@@ -49,6 +52,7 @@
     "glob": "^10.4.1",
     "memoizee": "^0.4.17",
     "node-cron": "^3.0.3",
+    "tsx": "^4.16.2",
     "zod": "^3.23.8"
   }
 }
