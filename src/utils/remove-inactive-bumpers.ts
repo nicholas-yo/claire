@@ -18,7 +18,8 @@ export const removeInactiveBumpers = async (
 
     await db.transaction(async tx => {
       const users = await tx
-        .delete(usersTable)
+        .select()
+        .from(usersTable)
         .where(
           and(
             lte(
@@ -27,8 +28,7 @@ export const removeInactiveBumpers = async (
             ),
             gt(usersTable.bumpCount, 0)
           )
-        )
-        .returning();
+        );
 
       const guild = client.guilds.cache.get(env.GUILD_ID);
 
