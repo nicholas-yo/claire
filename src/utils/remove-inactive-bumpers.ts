@@ -41,7 +41,11 @@ export const removeInactiveBumpers = async (
       for (const user of users) {
         const member = guild.members.cache.get(user.id);
 
-        if (!member) throw new Error("No member found");
+        if (!member) {
+          await tx.delete(usersTable).where(sql`${usersTable.id} = ${user.id}`);
+
+          continue;
+        }
 
         await member.roles.remove(bumperRole, "inatividade");
 
