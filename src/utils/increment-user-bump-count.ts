@@ -5,7 +5,7 @@ import { usersTable } from "../db/schema/users-table";
 export const incrementUserBumpCount = async (
   userId: string
 ): Promise<number | null> => {
-  const lastBumpAt = new Date().toTimeString();
+  const lastBumpAt = sql`(CURRENT_DATE)`;
 
   const [{ bumpCount }] = await db
     .insert(usersTable)
