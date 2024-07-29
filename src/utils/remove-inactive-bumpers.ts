@@ -23,7 +23,7 @@ export const removeInactiveBumpers = async (
         .where(
           and(
             lte(
-              sql`strftime('%Y-%m', ${usersTable.lastBumpAt} / 1000, 'unixepoch')`,
+              sql`strftime('%s', ${usersTable.lastBumpAt}) * 1000`,
               limit.getTime()
             ),
             gt(usersTable.bumpCount, 0)
